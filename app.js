@@ -15,8 +15,14 @@ console.log('Yargs ', argv);
 
 switch (command) {
     case 'add':
-        //console.log('Adding new note');
-        notes.addNote(argv.title, argv.body);
+        var note = notes.addNote(argv.title, argv.body);
+        
+        if (!_.isNil(note)) {
+            console.log('Note', note.title, 'successfully created');
+        } else {
+            console.log('Note already in use');
+        }
+        
         break;
     
     case 'list':
