@@ -16,7 +16,6 @@ var saveNotes = (notes) => {
 };
 
 var addNote = (title, body) => {
-    //console.log('Adding note', title, body);
     var notes = fetchNotes();
     var note = {
         title,
@@ -38,11 +37,22 @@ var getAllNotes = () => {
 };
 
 var getNote = (title) => {
-    console.log('Getting note', title);
+    var notes = fetchNotes();
+    var filteredNotes = notes.filter((note) => {
+        return note.title === title;
+    });
+
+    return filteredNotes[0];
 };
 
 var removeNote = (title) => {
-    console.log('Removing note', title);
+    var notes = fetchNotes();
+    var filteredNotes = notes.filter((note) => {
+        return note.title !== title;
+    });
+
+    saveNotes(filteredNotes);
+    return notes.length !== filteredNotes.length;
 };
 
 module.exports = {

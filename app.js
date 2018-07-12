@@ -16,13 +16,9 @@ console.log('Yargs ', argv);
 switch (command) {
     case 'add':
         var note = notes.addNote(argv.title, argv.body);
-        
-        if (!_.isNil(note)) {
-            console.log('Note', note.title, 'successfully created');
-        } else {
-            console.log('Note already in use');
-        }
-        
+        var message = !_.isNil(note) ? `Note ${note.title} successfully created` : 'Note already in use';
+
+        console.log(message);
         break;
     
     case 'list':
@@ -31,13 +27,17 @@ switch (command) {
         break;
     
     case 'read':
-        //console.log('Reading note');
-        notes.getNote(argv.title);
+        var note = notes.getNote(argv.title);
+        var message = !_.isNil(note) ? `Note ${note.body} successfully found` : 'Note not found';
+
+        console.log(message);
         break;
     
     case 'remove':
-        //console.log('Removing note');
-        notes.removeNote(argv.title);
+        var noteRemoved = notes.removeNote(argv.title);
+        var message = noteRemoved ? 'Note removed successfully' : 'Note not found';
+
+        console.log(message);
         break;
 
     default:
