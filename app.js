@@ -1,5 +1,3 @@
-console.log('Starting app.js');
-
 const fs = require('fs');
 const _ = require('lodash');
 const yargs = require('yargs');
@@ -8,10 +6,6 @@ const notes = require('./notes.js');
 
 const argv = yargs.argv;
 var command = process.argv[2];
-
-console.log('Command ', command);
-//console.log('Process ', process.argv);
-console.log('Yargs ', argv);
 
 switch (command) {
     case 'add':
@@ -22,8 +16,15 @@ switch (command) {
         break;
     
     case 'list':
-        //console.log('Listing all notes');
-        notes.getAllNotes();
+        var notesArray = notes.getAllNotes();
+
+        console.log(`${notesArray.length} notes found`);
+        
+        notesArray.forEach((note) => {
+            console.log('---');
+            console.log(`Title: ${note.title}`);
+            console.log(`Body: ${note.body}`);
+        });
         break;
     
     case 'read':
